@@ -1,3 +1,4 @@
+/*
 package com.ex.entity;
 
 import lombok.*;
@@ -26,3 +27,4 @@ public class Ticket {
         this.number = number;
     }
 }
+*/

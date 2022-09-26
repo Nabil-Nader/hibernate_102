@@ -1,3 +1,4 @@
+/*
 package com.ex.entity;
 
 import lombok.*;
@@ -35,3 +36,4 @@ public class Airport {
 
 
 }
+*/
