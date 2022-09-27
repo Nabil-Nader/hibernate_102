@@ -1,9 +1,11 @@
-/*
+
 package com.ex.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -13,18 +15,23 @@ import javax.persistence.*;
 public class Ticket {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
 
     private String number;
 
-    @ManyToOne
-    @JoinColumn(name = "passenger_id")
-    private Passenger passenger;
+    @ManyToMany
+    private List<Passenger> passengers =  new ArrayList<>();
+
+    public void addPassenger(Passenger passenger){
+        passengers.add(passenger);
+    }
 
 
-    public Ticket(Long id, String number) {
-        this.id = id;
+    public Ticket( String number) {
+
         this.number = number;
     }
 }
-*/
+

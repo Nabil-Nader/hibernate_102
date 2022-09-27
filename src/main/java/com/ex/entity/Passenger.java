@@ -1,45 +1,51 @@
 package com.ex.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
 @Setter
 @Entity
 @Table(name = "passengers")
-@SecondaryTable(name = "addresses", pkJoinColumns = @PrimaryKeyJoinColumn(name = "passenger_id", referencedColumnName = "passenger_id"))
+@NoArgsConstructor
 public class Passenger {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "passenger_id")
     private Long id;
 
     private String name;
-//
-//    @Column(name = "p_address",table = "addresses",columnDefinition = "VarChar(25) not null ")
-//    private String address;
 
-    @Column(name = "p_city", table = "addresses", columnDefinition = "VarChar(25) not null ")
-    private String city;
+    @ManyToMany(mappedBy="passengers")
+    private List<Ticket> tickets =  new ArrayList<>();
 
-    @Column(name = "p_zip", table = "addresses", columnDefinition = "VarChar(25) not null ")
-    private String zip;
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
 
-    @Column(name = "p_street", table = "addresses", columnDefinition = "VarChar(25) not null ")
-    private String street;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 
-//    @ManyToOne
+    public void addTicket(Ticket ticket){
+        this.tickets.add(ticket);
+    }
+
+    //    @ManyToOne
 //    @JoinColumn(name="airport_id")
 //    private Airport airPort;
 //
 //    @OneToMany(mappedBy = "passenger")
 //    private List<Ticket> tickets = new ArrayList<>();
 
-    public Passenger(Long id, String name) {
-        this.id = id;
+    public Passenger(String name) {
         this.name = name;
     }
 
